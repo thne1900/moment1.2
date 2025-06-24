@@ -6,6 +6,7 @@
 - Därefter utformades html-dokumentet med webbplatens element och innehåll.
 - Styling med utformning och placering gjordes i style.css
 - Typescript-kod gjordes i filen main.ts för att få ut kurslistan till webbplatsen. 
+- Skapadet ett formulär för att kunna hantera tillägg av nya kurser. 
 
 
 
