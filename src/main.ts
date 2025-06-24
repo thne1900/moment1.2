@@ -89,8 +89,5 @@ links.innerHTML=`${course.syllabus}`;
   li.style.margin="4%";
 
  });
- 
 }
-
-
 
