@@ -11,14 +11,14 @@ interface CourseInfo{
 //En array som lagrar kursdata:
 let coursesData:CourseInfo[]=[];
 
-//Vid sidinladdning: försöker ladda från localStorage, annars från API.
+//Vid sidinladdning: från localStorage eller från API.
 window.onload=()=>{
 loadCoursesLocalStorage()||
   getCourses();
 }
 
-//Funktion för lokalstorage:
-function loadCoursesLocalStorage():boolean{
+//Funktion för localstorage:
+function loadCoursesLocalStorage():boolean {
   const dataStorage=localStorage.getItem("coursesData");
   if (dataStorage) {
     try {
@@ -38,8 +38,7 @@ function loadCoursesLocalStorage():boolean{
   }
 
 //Asynkron funktion för att hämta kurser via API. 
-async function getCourses(): 
-Promise<void>{
+async function getCourses(): Promise<void> {
   const url="https://webbutveckling.miun.se/files/ramschema_ht24.json";
 
   try {
@@ -81,13 +80,69 @@ links.href=course.syllabus;
 links.innerHTML=`${course.syllabus}`;
 
   li.innerHTML=`<strong>KURSKOD:</strong> ${course.code} <strong>KURSNAMN:</strong> 
-  <i>${course.coursename}</I> <strong>PROGRESSION:</strong> ${course.progression} <strong>KURSLÄNK:</strong>`;
+  <i>${course.coursename}</i> <strong>PROGRESSION:</strong> ${course.progression} <strong>KURSLÄNK:</strong>`;
   
   li.appendChild(links);
   courseList.appendChild(li);
 
+  //Styling på listan
   li.style.margin="4%";
 
  });
 }
+
+//Funktion för att lägga till kurs
+function addCourse(newCourse:CourseInfo):void{
+  coursesData.push(newCourse);
+  
+  displayCoursesList();
+
+  localStorage.setItem("coursesData", JSON.stringify(coursesData));
+}
+
+//Validering för kontroll:
+function uniqueCourseCode(code:string):boolean {
+  return!coursesData.some(course=>course.code===code);
+}
+
+function correctProg(progression:string):boolean {
+  const acceptProg= ["A", "B","C"];
+  return acceptProg.includes(progression);
+}
+
+document.getElementById("addCourseForm")?.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+const code=(document.getElementById("code") as HTMLInputElement).value;
+const coursename=(document.getElementById("name")as HTMLInputElement).value;
+const progression=(document.getElementById("prog") as HTMLInputElement).value;
+const syllabus=(document.getElementById("syllabus") as HTMLInputElement).value;
+
+if(!uniqueCourseCode(code)){
+  alert ("Kurskoden är inte unik! Det finns redan en kurs med denna kurskod");
+  return;
+}
+
+if(!correctProg(progression)){
+  alert ("Progressionen är inte korrekt! Begränsad till A, B eller C.");
+  return;
+}
+
+const newCourse:CourseInfo= {
+  code,
+  coursename,
+  progression,
+  syllabus
+
+};
+
+addCourse(newCourse);
+
+//Ta bort inmatningen i inputfälten. 
+(document.getElementById("code") as HTMLInputElement).value="";
+(document.getElementById("name") as HTMLInputElement).value="";
+(document.getElementById("prog") as HTMLInputElement).value="";
+(document.getElementById("syllabus") as HTMLInputElement).value="";
+
+});
 
