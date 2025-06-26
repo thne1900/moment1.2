@@ -1,6 +1,6 @@
 import './style.css'
 
-//Kursobjekt med typer
+//Interface med kursobjekt
 interface CourseInfo{
   code:string;
   coursename:string;
@@ -14,10 +14,10 @@ let coursesData:CourseInfo[]=[];
 //Vid sidinladdning: från localStorage eller från API.
 window.onload=()=>{
 loadCoursesLocalStorage()||
-  getCourses();
+getCourses();
 }
 
-//Funktion för localstorage:
+//Funktion för localStorage:
 function loadCoursesLocalStorage():boolean {
   const dataStorage=localStorage.getItem("coursesData");
   if (dataStorage) {
@@ -58,7 +58,7 @@ async function getCourses(): Promise<void> {
 
     });
   }catch (error){
-    console.error('Ett fel har inträffat:', error);
+    console.error("Ett fel har inträffat:", error);
   }
 }
 
@@ -110,8 +110,8 @@ function correctProg(progression:string):boolean {
   return acceptProg.includes(progression);
 }
 
-document.getElementById("addCourseForm")?.addEventListener("submit", (e)=>{
-  e.preventDefault();
+document.getElementById("addCourseForm")?.addEventListener("submit", (event)=>{
+  event.preventDefault();
 
 const code=(document.getElementById("code") as HTMLInputElement).value;
 const coursename=(document.getElementById("name")as HTMLInputElement).value;
