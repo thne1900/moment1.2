@@ -9,9 +9,10 @@
 - Typescript-kod gjordes i filen main.ts för att få ut kurslistan till webbplatsen. 
 - Skapade ett formulär (index.html) för att kunna hantera tillägg av nya kurser. 
 - I main.ts utformades kod för att kunna fylla i inputfälten och lägga till ny kurs till kurslistan. 
-- Validering, för att kurskoden ska vara unik och inte kan skrivas igen och en begränsning på progression         gjordes (Vid felinmatning i inputfälten kommer en alertruta upp med information.)
+- Validering, för att kurskoden ska vara unik och inte kan skrivas igen och en begränsning på progression         gjordes (Vid felinmatning i inputfälten kommer en alert-ruta upp med information.)
 - Vid tillägg av ny kurs tömms även inputfälten med inmatningen, så att det går att lägga till en ny kurs igen. 
 - Vid sidinladdning sparas ändringarna via localstorage. 
+- Extra tillägg av ikoner i index.html dokumentet för att styla sidan. 
  
 
 
