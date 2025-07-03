@@ -3,10 +3,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -39,10 +35,11 @@ body {
     grid-column-gap: 2%;
 }
 
-h1 {grid-row-start: 1; 
-    grid-column-start: 2; 
-    grid-row-end: 2; 
-    grid-column-end: 2;
+h1 {
+  grid-row-start: 1; 
+  grid-column-start: 2; 
+  grid-row-end: 2; 
+  grid-column-end: 2;
   text-align: center;
   font-size: 2.5em;
   line-height: 1.1;
@@ -58,37 +55,38 @@ h1 {grid-row-start: 1;
   margin-right: 20%;
 }
 
-form {grid-area:2/1/2/1;
-margin-left:4%;
-margin-top: 6%;
+form {
+  grid-area:2/1/2/1;
+  margin-left:4%;
+  margin-top: 6%;
 }
 
 h2 {
-font-size: 1.3em;
-font-weight: 600;
-text-decoration: underline;
-text-align: center;
+  font-size: 1.3em;
+  font-weight: 600;
+  text-decoration: underline;
+  text-align: center;
 }
 
 input {
-padding:2%;
-margin:4%;
-border: 2px black solid;
-width:80%;
+  padding:2%;
+  margin:4%;
+  border: 2px black solid;
+  width:80%;
 }
 
 #addButton {
-background-color: lightblue;
-font-size: 1.2em;
-font-weight: bolder;
-padding:2%;
-margin-left: 25%;
+  background-color: lightblue;
+  font-size: 1.2em;
+  font-weight: bolder;
+  padding:2%;
+  margin-left: 25%;
 }
 
 #addButton:hover {
-background-color: lightgreen;
-font-size: 1.3em;
-border: 4px black solid;
+  background-color: lightgreen;
+  font-size: 1.3em;
+  border: 4px black solid;
 }
 
 ol {
@@ -114,21 +112,6 @@ footer{
   background-color: lightblue;
   padding:2%;
   border: 4px black solid;
-}
-
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 @media (max-width:1024px){
