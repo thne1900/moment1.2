@@ -19,7 +19,7 @@ getCourses();
 
 //Funktion för localStorage:
 function loadCoursesLocalStorage():boolean {
-  const dataStorage=localStorage.getItem("coursesData");
+  const dataStorage:string|null=localStorage.getItem("coursesData");
   if (dataStorage) {
     try {
       const parsedData:CourseInfo[]=JSON.parse(dataStorage);
@@ -63,7 +63,7 @@ async function getCourses(): Promise<void> {
 }
 
 //Funktion för att få ut kurserna, DOM
-function displayCoursesList(){
+function displayCoursesList():void{
   const courseList:HTMLElement|null=document.getElementById("coursesInfoList");
   if(!courseList){
     console.error("Elementet för listan hittades inte");
@@ -72,10 +72,10 @@ function displayCoursesList(){
   
  courseList.innerHTML="";
 
- coursesData.forEach(course=>{
-  const li=document.createElement("li");
+ coursesData.forEach((course, index)=>{
+  const li:HTMLLIElement=document.createElement("li");
 
-let links=document.createElement("a");
+const links:HTMLAnchorElement=document.createElement("a");
 links.href=course.syllabus;
 links.innerHTML=`${course.syllabus}`;
 
@@ -83,6 +83,25 @@ links.innerHTML=`${course.syllabus}`;
   <i>${course.coursename}</i> <strong>PROGRESSION:</strong> ${course.progression} <strong>KURSLÄNK:</strong>`;
   
   li.appendChild(links);
+
+
+//Tabort-knapp:
+let deleteButton:HTMLButtonElement=document.createElement("button");
+deleteButton.innerHTML="Ta bort kurs";
+
+//Styling på tabort-knappen:
+deleteButton.style.marginLeft="15px";
+deleteButton.style.padding="1%";
+deleteButton.style.backgroundColor="pink";
+deleteButton.style.cursor="pointer";
+
+
+deleteButton.addEventListener("click",()=> {
+  removeCourse(index); 
+});
+
+li.appendChild(deleteButton);
+
   courseList.appendChild(li);
 
   //Styling på listan
@@ -106,7 +125,7 @@ function uniqueCourseCode(code:string):boolean {
 }
 
 function correctProg(progression:string):boolean {
-  const acceptProg= ["A", "B","C"];
+  const acceptProg:string[]= ["A", "B","C"];
   return acceptProg.includes(progression);
 }
 
@@ -145,4 +164,13 @@ addCourse(newCourse);
 (document.getElementById("syllabus") as HTMLInputElement).value="";
 
 });
+
+function removeCourse(index:number):void {
+
+  coursesData.splice(index, 1);
+  localStorage.setItem("coursesData", JSON.stringify(coursesData));
+
+  displayCoursesList();
+
+}
 
